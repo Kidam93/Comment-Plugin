@@ -6,6 +6,7 @@ use PDOException;
 
 class Config{
 
+    // CONFIG
     const SERV_NAME = "localhost";
     const USERNAME = "root";
     const PASSWORD = "";
