@@ -1,3 +1,7 @@
+# entrypoint
+
+http://127.0.0.1:8000/src/Comment.php
+
 # edit your database config in src/Config.php
 
 const SERV_NAME = "localhost";

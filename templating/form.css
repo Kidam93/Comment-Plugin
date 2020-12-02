@@ -4,6 +4,7 @@
 }
 h3{
     margin-top: 45px;
+    margin-bottom: 15px;
     text-align: center;
 }
 .container{
@@ -41,4 +42,17 @@ input{
     width: 50px;
     height: 25px;
     margin: auto;
+}
+.alert{
+    border-radius: 5px;
+    margin: auto;
+    background-color: rgba(177, 40, 40, 0.17);
+    width: calc(250px + 15vw);
+    display: flex;
+    justify-content: center;
+    padding: 5px 0px;
+}
+.alert p{
+    line-height: 20px;
+    display: block;
 }
