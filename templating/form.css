@@ -50,7 +50,6 @@ input{
     width: calc(250px + 15vw);
     display: flex;
     justify-content: center;
-    padding: 5px 0px;
 }
 .alert p{
     line-height: 20px;

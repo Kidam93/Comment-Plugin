@@ -37,6 +37,7 @@ class Config{
             $dbTable = self::DB_TABLE;
             $db = self::dbConf();
             $sql = "CREATE TABLE {$dbName}.{$dbTable} (
+                id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 FirstName varchar(255),
                 LastName varchar(255),
                 Comment text,
