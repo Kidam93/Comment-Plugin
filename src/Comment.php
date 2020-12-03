@@ -6,34 +6,22 @@ use DateTime;
 use App\Config;
 use PDOException;
 
-define('DS', DIRECTORY_SEPARATOR);
+// define('DS', DIRECTORY_SEPARATOR);
 require dirname(__DIR__) .DS.'vendor'.DS.'autoload.php';
 
 /**
+ * http://127.0.0.1:8000/src/Comment.php
+ * 
  * Config::createDB();
  * Config::createTable();
  * Config::dropTable();
  * Config::dropDB();
  */
 
-class Comment extends Config{
+class Comment extends Database{
 
     public function __construct($request){
         $this->request = $request;
-    }
-
-    // CONFIG
-    const SERV_NAME = "localhost";
-    const USERNAME = "root";
-    const PASSWORD = "";
-    const DB_NAME = "Plugin";
-    const DB_TABLE = "Comment";
-    const PORT = "3308";
-
-    public static function dbConf(){
-        $db = new PDO("mysql:host=".self::SERV_NAME.";port=".self::PORT, self::USERNAME, self::PASSWORD);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $db;
     }
 
     public function isValid(){
@@ -65,26 +53,25 @@ class Comment extends Config{
                 ':lastname' => $lastname, 
                 ':message' => $message, 
                 ':date' => $date]);
-            echo "Entrée ajoutée dans la table".self::DB_TABLE;
+            // echo "Entrée ajoutée dans la table ".self::DB_TABLE;
         }catch(PDOException $e){
             echo "Erreur : " . $e->getMessage();
         }
     }
 
-}
+    public function selectAll(){
+        try{
+            $dbName = self::DB_NAME;
+            $dbTable = self::DB_TABLE;
+            $db = self::dbConf();
+            $sth = $db->prepare("SELECT * FROM {$dbName}.{$dbTable}");
+            $sth->execute();
+            $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+            // echo 'Données de '.self::DB_TABLE.' recuperé !';
+            return $data;
+        }catch(PDOException $e){
+          echo "Erreur : " . $e->getMessage();
+        }
+    }
 
-$comment = new Comment($_REQUEST);
-$isValid = $comment->isValid();
-if(session_status() == PHP_SESSION_NONE){
-    session_start();
-}
-if(empty($isValid)){
-    $_SESSION['form'] = $isValid;
-    $comment->registerData();
-    // header('Location: http://127.0.0.1:8000/templating/form.php');
-    // exit();
-}else{
-    $_SESSION['form'] = $isValid;
-    header('Location: http://127.0.0.1:8000/templating/form.php');
-    exit();
 }

@@ -6,4 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Comment' => $baseDir . '/src/Comment.php',
+    'App\\Config' => $baseDir . '/src/Config.php',
+    'App\\Database' => $baseDir . '/src/Database.php',
 );
